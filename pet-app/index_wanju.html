@@ -39,13 +39,63 @@
 					</a></div>
 					<nav class="nav pull-left">
 						<ul>
-							<li class="active"><a href="index.html">首页</a></li>
+							<li><a href="index.html">首页</a></li>
+							<li><a href="index_picture.html?id=112">宠物壁纸</a>
+								<ul>
+									<li><a href="index_picture.html?id=112">萌兔壁纸</a></li>
+									<li><a href="index_picture.html?id=113">萌猫壁纸</a></li>
+									<li><a href="index_picture.html?id=114">萌狗壁纸</a></li>
+									<li><a href="index_picture.html?id=115">鹦鹉壁纸</a></li>
+									<li><a href="index_picture.html?id=116">仓鼠壁纸</a></li>
+									<li><a href="index_picture.html?id=117">水族壁纸</a></li>
+									<li><a href="index_picture?id=118">萌龟壁纸</a></li>
+								</ul>
+							</li>
+							<li><a href="index_keng.html">买宠避坑</a>
+								<ul>
+									<li><a href="index_keng.html">买兔子</a></li>
+									<li><a href="index_keng.html">买猫猫</a></li>
+									<li><a href="index_keng.html">买狗狗</a></li>
+									<li><a href="index_keng.html">买鹦鹉</a></li>
+									<li><a href="index_keng.html">买仓鼠</a></li>
+									<li><a href="index_keng.html">买水族</a></li>
+									<li><a href="index_keng.html">买萌龟</a></li>
+								</ul>
+							</li>
+							<li class="active"><a href="index_wanju.html">宠物用品</a>
+								<ul>
+									<li><a href="index_wanju.html">兔子用品</a></li>
+									<li><a href="index_wanju.html">萌猫用品</a></li>
+									<li><a href="index_wanju.html">狗狗用品</a></li>
+									<li><a href="index_wanju.html">鹦鹉用品</a></li>
+									<li><a href="index_wanju.html">仓鼠用品</a></li>
+									<li><a href="index_wanju.html">水族用品</a></li>
+									<li><a href="index_wanju.html">萌龟用品</a></li>
+								</ul>
+							</li>
+							<li><a href="index_answer.html">宠物问答</a>
+								<ul>
+									<li><a href="index_answer.html">兔子问答</a></li>
+									<li><a href="index_answer.html">猫猫问答</a></li>
+									<li><a href="index_answer.html">狗狗问答</a></li>
+									<li><a href="index_answer.html">鹦鹉问答</a></li>
+									<li><a href="index_answer.html">仓鼠问答</a></li>
+									<li><a href="index_answer.html">水族问答</a></li>
+									<li><a href="index_answer.html">萌龟问答</a></li>
+								</ul>
+							</li>
+							<li><a href="contact.html">赚取稿费</a>
+								<ul>
+									<li><a href="message.html">在线留言</a></li>
+									<li><a href="contact.html">投稿联系</a></li>
+								</ul>
+							</li>
 						</ul>
 					</nav>
 					<div class="search pull-left">
 						<img src="images/search.png" />
-						<input type="text" class="top_search" value="" />
-						<input type="submit" class="top_sub" value="搜索" />
+						<input type="text" class="top_search" value="" id="text_search" />
+						<input type="submit" class="top_sub" value="搜索" id="btn_search" />
 					</div>
 				</section>
 			</header>
@@ -60,7 +110,7 @@
 				<div class="pro-title clearfix">
 					<span class="pull-left" id="span_title"></span>
 					<p class="pull-right">
-						<a href="#" id="a_image_list">图片大全</a><em>|</em>
+						<!-- <a href="#" id="a_image_list">图片大全</a><em>|</em> -->
 					<!-- 	<a class="active" href="product.html">爱情鲜花</a><em>|</em>
 						<a href="#">长辈鲜花</a> -->
 					</p>
@@ -102,52 +152,31 @@
 				$(function() {
 					$('input, textarea').placeholder();
 				});
-				var id = getUrlParam('id'); 
-				$.get(url+"/item/type?id="+id,function(data){
-					$('#span_title').text(data.data.name)
-					$('#img_bigimage').attr('src',data.data.bigImage)
-				});
-				 // 详细 养宠教程 文字推荐列表
 				function addMainItemsDom(obj){
 					var dom = '<li class="wow rollIn" data-wow-delay="0.3s">'+
 							'<div class="flower-ch">'+
-								'<span>'+obj.createTime+'</span><a style="font-size:20px"href="flower_show.html?id='+obj.id+'">'+obj.title+'</a>'+
+								'<span>'+obj.createTime+'</span><a style="font-size:20px"href="item_details.html?id='+obj.id+'">'+obj.title+'</a>'+
 								'<div class="line"></div>'+
 							'</div>'+
 							'<p style="font-size:16px">'+obj.preview+'...</p>'+
 						'</li>';
 					$('#ul_list').append(dom);
 				}
-				$.get(url+"/item/selectByTypes?typeId="+id,function(data){
-					for(var i=0;i<data.data.length;i++){
-						addMainItemsDom(data.data[i])
-					}
-				});
-				
+				var ids = getCookieValue("search_values");
+				var search_keywords = getCookieValue("search_keywords");
+				ids = JSON.parse(ids)
+				for (var i=0;i<ids.length;i++){
+					addMainItemsDom(ids[i])
+				}
+				$('#span_title').html("趣养宠为您找到 <font color='red'>"+search_keywords+"</font> 相关结果约 <font color='red'>"+ids.length+"</font> 个")
+			
 				// 二维码等
 				$.get(url+"/item/maincfg",function(data){
 					$('#b_qq').text(data.data.contactQq);
 					$('#img_qrcode').attr('src',data.data.contactQrbarcode);
 				});
 				
-				//图片大全
-				if(id == 2){
-					//猫
-					$('#a_image_list').attr('href',"flower_show.html?id=113");
-				}else if(id == 4){
-					$('#a_image_list').attr('href',"flower_show.html?id=112");
-				}else if(id == 3){
-					$('#a_image_list').attr('href',"flower_show.html?id=114");
-				}else if(id == 1){
-					$('#a_image_list').attr('href',"flower_show.html?id=115");
-				}else if(id == 6){
-					$('#a_image_list').attr('href',"flower_show.html?id=116");
-				}else if(id == 5){
-					$('#a_image_list').attr('href',"flower_show.html?id=117");
-				}else if(id == 7){
-					$('#a_image_list').attr('href',"flower_show.html?id=118");
-				}
-				
+				init_common();
 			</script>
 
 			<!--<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->

@@ -8,9 +8,31 @@ function getUrlParam(name) {
 	if (r != null) return unescape(r[2]);
 	return null; //返回参数值
 }
-
-
-
+function getCookieValue(name) {
+  let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
+  return result ? result.pop() : ""
+}
+// 初始化 页面共同 js
+function init_common(){
+	// 初始化 搜索按钮
+	$('#btn_search').click(function() {
+		var str = $('#text_search').val();
+		if (str == '') {
+			return;
+		}
+		//调用搜索结果
+		$.get(url + "/item/selectByTitles?t="+str, function(data) {
+			if(data.data.length == 0){
+				alert("没有相关结果！请换个关键词试试~");
+				return ;
+			}
+			document.cookie = "search_values="+JSON.stringify(data.data) ;
+			document.cookie = "search_keywords="+str ;
+			//跳转到搜索详情页面
+			window.location.href="search_list.html";
+		});
+	});
+}
 
 
 

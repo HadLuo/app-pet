@@ -45,13 +45,63 @@
 			</a></div>
 			<nav class="nav pull-left">
 				<ul>
-					<li class="active"><a href="index.html" >首页</a></li>
+					<li><a href="index.html">首页</a></li>
+					<li class="active"><a href="index_picture.html?id=112">宠物壁纸</a>
+						<ul>
+							<li><a href="index_picture.html?id=112">萌兔壁纸</a></li>
+							<li><a href="index_picture.html?id=113">萌猫壁纸</a></li>
+							<li><a href="index_picture.html?id=114">萌狗壁纸</a></li>
+							<li><a href="index_picture.html?id=115">鹦鹉壁纸</a></li>
+							<li><a href="index_picture.html?id=116">仓鼠壁纸</a></li>
+							<li><a href="index_picture.html?id=117">水族壁纸</a></li>
+							<li><a href="index_picture?id=118">萌龟壁纸</a></li>
+						</ul>
+					</li>
+					<li><a href="index_keng.html">买宠避坑</a>
+						<ul>
+							<li><a href="index_keng.html">买兔子</a></li>
+							<li><a href="index_keng.html">买猫猫</a></li>
+							<li><a href="index_keng.html">买狗狗</a></li>
+							<li><a href="index_keng.html">买鹦鹉</a></li>
+							<li><a href="index_keng.html">买仓鼠</a></li>
+							<li><a href="index_keng.html">买水族</a></li>
+							<li><a href="index_keng.html">买萌龟</a></li>
+						</ul>
+					</li>
+					<li><a href="index_wanju.html">宠物用品</a>
+						<ul>
+							<li><a href="index_wanju.html">兔子用品</a></li>
+							<li><a href="index_wanju.html">萌猫用品</a></li>
+							<li><a href="index_wanju.html">狗狗用品</a></li>
+							<li><a href="index_wanju.html">鹦鹉用品</a></li>
+							<li><a href="index_wanju.html">仓鼠用品</a></li>
+							<li><a href="index_wanju.html">水族用品</a></li>
+							<li><a href="index_wanju.html">萌龟用品</a></li>
+						</ul>
+					</li>
+					<li><a href="index_answer.html">宠物问答</a>
+						<ul>
+							<li><a href="index_answer.html">兔子问答</a></li>
+							<li><a href="index_answer.html">猫猫问答</a></li>
+							<li><a href="index_answer.html">狗狗问答</a></li>
+							<li><a href="index_answer.html">鹦鹉问答</a></li>
+							<li><a href="index_answer.html">仓鼠问答</a></li>
+							<li><a href="index_answer.html">水族问答</a></li>
+							<li><a href="index_answer.html">萌龟问答</a></li>
+						</ul>
+					</li>
+					<li><a href="contact.html">赚取稿费</a>
+						<ul>
+							<li><a href="message.html">在线留言</a></li>
+							<li><a href="contact.html">投稿联系</a></li>
+						</ul>
+					</li>
 				</ul>
 			</nav>
 			<div class="search pull-left">
 				<img src="images/search.png"/>
-				<input type="text" class="top_search"   value="" />
-				<input type="submit" class="top_sub" value="搜索" />
+				<input type="text" class="top_search" value="" id="text_search" />
+				<input type="submit" class="top_sub" value="搜索" id="btn_search" />
 			</div>
 		</section> 		
 	</header>
@@ -155,6 +205,8 @@
 			$('#b_qq').text(data.data.contactQq);
 			$('#img_qrcode').attr('src',data.data.contactQrbarcode);
 		});
+		
+		init_common();
 		
 </script>
 <!--<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
