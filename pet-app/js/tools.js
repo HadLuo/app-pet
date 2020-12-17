@@ -12,6 +12,45 @@ function getCookieValue(name) {
   let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
   return result ? result.pop() : ""
 }
+
+function init_top_kinds(t_name){
+	function addMainItemsDom(obj){
+		var dom = '<li class="wow rollIn" data-wow-delay="0.3s">'+
+				'<div class="flower-ch">'+
+					'<span>'+obj.createTime+'</span><a style="font-size:20px"href="item_details.html?id='+obj.id+'">'+obj.title+'</a>'+
+					'<div class="line"></div>'+
+				'</div>'+
+				'<p style="font-size:16px">'+obj.preview+'...</p>'+
+			'</li>';
+		$('#ul_list').append(dom);
+	}
+	var kid = getUrlParam("kid");
+	var tid= getUrlParam("tid");
+	//请求文章
+	$.get(url+"/item/selectByKind?kid="+kid+"&tid="+tid,function(data){
+		for(var i =0;i<data.data.length;i++){
+			addMainItemsDom(data.data[i]);
+		}
+	});
+	var typename = "";
+	if(tid == 1){
+		typename = '鹦鹉';
+	}else if(tid == 2){
+		typename = '猫猫';
+	}else if(tid == 3){
+		typename = '狗狗';
+	}else if(tid == 4){
+		typename = '萌兔';
+	}else if(tid == 5){
+		typename = '水族';
+	}else if(tid == 6){
+		typename = '仓鼠';
+	}else if(tid == 7){
+		typename = '萌龟';
+	}
+	$('#span_title').html(t_name + "-" + typename)
+}
+
 // 初始化 页面共同 js
 function init_common(){
 	// 初始化 搜索按钮
